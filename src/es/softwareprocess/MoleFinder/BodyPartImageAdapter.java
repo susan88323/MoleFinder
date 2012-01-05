@@ -9,7 +9,7 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 
 // Stolen from http://developer.android.com/resources/tutorials/views/hello-gallery.html
-public class ImageAdapter extends BaseAdapter {
+public class BodyPartImageAdapter extends BaseAdapter {
     int mGalleryItemBackground;
     private Context mContext;
 
@@ -17,7 +17,7 @@ public class ImageAdapter extends BaseAdapter {
   
     };
 
-    public ImageAdapter(Context c) {
+    public BodyPartImageAdapter(Context c) {
         mContext = c;
         //TypedArray attr = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
         //mGalleryItemBackground = attr.getResourceId(

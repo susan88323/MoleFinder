@@ -32,11 +32,11 @@ public class BodyPartArchiveActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cameratest);
-        
+        BodyPart bp = (BodyPart) getIntent().getExtras().get("bodypart");
 		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
 
 	    Gallery gallery = (Gallery) findViewById(R.id.gallery);
-	    gallery.setAdapter(new ImageAdapter(this));
+	    gallery.setAdapter(new BodyPartImageAdapter(this));
 
 	    gallery.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView parent, View v, int position, long id) {
