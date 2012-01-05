@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 import android.content.Intent;
+import android.net.Uri;
 
 public class MoleFinder implements Serializable {
 	static public String name = "MoleFinder";
@@ -36,5 +37,8 @@ public class MoleFinder implements Serializable {
 	public void save() {
 		// TODO Auto-generated method stub
 		
+	}
+	public void addPhotoToBodyPart(BodyPart bodyPart, Uri imageFileUri) {
+		bodyPart.addPhoto(new BodyPartPhoto(imageFileUri,System.currentTimeMillis()));
 	}	
 }

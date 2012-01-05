@@ -26,6 +26,14 @@
             android:name=".NewBodyPartActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".TakeAPhotoActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".BodyPartArchiveActivity"
+            android:label="@string/app_name" >
+        </activity>
         
     </application>
 

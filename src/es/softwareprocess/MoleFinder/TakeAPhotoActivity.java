@@ -22,7 +22,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnClickListener;
 public class TakeAPhotoActivity extends Activity {
-
+	BodyPart bodyPart = null;
 	Uri imageFileUri;
     /** Called when the activity is first created. */
     @Override
@@ -31,7 +31,7 @@ public class TakeAPhotoActivity extends Activity {
         setContentView(R.layout.cameratest);
         
 		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
-
+		bodyPart = (BodyPart) getIntent().getExtras().get("bodypart");
         ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);
         OnClickListener listener = new OnClickListener() {
             public void onClick(View v) {
@@ -100,6 +100,9 @@ public class TakeAPhotoActivity extends Activity {
     			ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);    		
     			button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
     			//button.setImageBitmap(thumbnail);
+    			MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
+    			
+    			mf.addPhotoToBodyPart(bodyPart, imageFileUri);
     			
     		} else if (resultCode == RESULT_CANCELED) {
             // 	User cancelled the image capture

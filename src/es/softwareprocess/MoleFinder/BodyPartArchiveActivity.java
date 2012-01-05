@@ -26,17 +26,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
 public class BodyPartArchiveActivity extends Activity {
-
+	private BodyPart bp = null;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cameratest);
-        BodyPart bp = (BodyPart) getIntent().getExtras().get("bodypart");
+        setContentView(R.layout.bodypartarchive);
+        bp = (BodyPart) getIntent().getExtras().get("bodypart");
 		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
 
 	    Gallery gallery = (Gallery) findViewById(R.id.gallery);
-	    gallery.setAdapter(new BodyPartImageAdapter(this));
+	    gallery.setAdapter(new BodyPartImageAdapter(this, bp));
 
 	    gallery.setOnItemClickListener(new OnItemClickListener() {
 	        public void onItemClick(AdapterView parent, View v, int position, long id) {
@@ -44,11 +44,15 @@ public class BodyPartArchiveActivity extends Activity {
 	        }
 	    });
 
-       Button acceptButton = (Button)findViewById(R.id.Accept);
+       Button addPhotoButton = (Button)findViewById(R.id.addPhoto);
         
-        acceptButton.setOnClickListener( new OnClickListener() {
+       addPhotoButton.setOnClickListener( new OnClickListener() {
             public void onClick(View v) {
-            	finish();
+            	// remember to jam in a result here
+    			Intent intent = new Intent(BodyPartArchiveActivity.this, TakeAPhotoActivity.class);
+				intent.putExtra("molefinder", MoleFinder.getMoleFinder());
+				intent.putExtra("bodypart", bp);
+				startActivity(intent);
             }        	
         });
     }

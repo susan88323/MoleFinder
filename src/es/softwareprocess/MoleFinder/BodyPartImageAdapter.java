@@ -11,14 +11,16 @@ import android.widget.ImageView;
 // Stolen from http://developer.android.com/resources/tutorials/views/hello-gallery.html
 public class BodyPartImageAdapter extends BaseAdapter {
     int mGalleryItemBackground;
+    BodyPart bodyPart;
     private Context mContext;
 
     private Integer[] mImageIds = {
   
     };
 
-    public BodyPartImageAdapter(Context c) {
+    public BodyPartImageAdapter(Context c, BodyPart bodyPart) {
         mContext = c;
+        this.bodyPart = bodyPart;
         //TypedArray attr = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
         //mGalleryItemBackground = attr.getResourceId(
         //        R.styleable.HelloGallery_android_galleryItemBackground, 0);
