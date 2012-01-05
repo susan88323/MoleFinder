@@ -53,8 +53,22 @@ public class BodyPartArchiveActivity extends Activity {
 				intent.putExtra("molefinder", MoleFinder.getMoleFinder());
 				intent.putExtra("bodypart", bp);
 				startActivity(intent);
+				startActivityForResult(intent, TakeAPhotoActivity.TAKE_A_PHOTO);
             }        	
         });
+    }
+    @Override 
+    public void onActivityResult(int requestCode, int resultCode, Intent newIntent) {     
+      super.onActivityResult(requestCode, resultCode, newIntent); 
+      switch(requestCode) { 
+        case (TakeAPhotoActivity.TAKE_A_PHOTO) : { 
+          if (resultCode == Activity.RESULT_OK) { 
+        	  MoleFinder.getMoleFinder(newIntent);
+        	  // update activity..        	  
+          } 
+          break; 
+        } 
+      } 
     }
 
 }

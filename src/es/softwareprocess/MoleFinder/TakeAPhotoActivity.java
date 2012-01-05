@@ -61,10 +61,19 @@ public class TakeAPhotoActivity extends Activity {
     }
 
     void addPhoto() {
-    	
+		Intent resultIntent = new Intent();
+
+		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
+		mf.addPhotoToBodyPart(bodyPart, imageFileUri);
+
+		resultIntent.putExtra(MoleFinder.name, mf );
+		
+		setResult(Activity.RESULT_OK, resultIntent);
+
     }
-    
+    protected static String id = "ID"; 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
+	protected static final int TAKE_A_PHOTO = 666;
 
 
     
@@ -100,9 +109,9 @@ public class TakeAPhotoActivity extends Activity {
     			ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);    		
     			button.setImageDrawable(Drawable.createFromPath(imageFileUri.getPath()));
     			//button.setImageBitmap(thumbnail);
-    			MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
     			
-    			mf.addPhotoToBodyPart(bodyPart, imageFileUri);
+    			
+    			
     			
     		} else if (resultCode == RESULT_CANCELED) {
             // 	User cancelled the image capture

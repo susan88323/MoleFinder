@@ -7,12 +7,13 @@ import android.content.Intent;
 import android.net.Uri;
 
 public class MoleFinder implements Serializable {
-	static public String name = "MoleFinder";
+	static public String name = "molefinder";
 	transient static private MoleFinder moleFinderSingleton = null;
-	static public MoleFinder getMoleFinder(Intent intent) {
-		if (moleFinderSingleton == null) {
-			moleFinderSingleton = (MoleFinder)(intent.getExtras().get("molefinder"));			
-		}
+	static public MoleFinder getMoleFinder(Intent intent) {		
+		MoleFinder mf = (MoleFinder)(intent.getExtras().get(name));
+		if (mf!=null) {
+			moleFinderSingleton = mf;				
+		}		
 		return getMoleFinder();
 	}
 	static public MoleFinder getMoleFinder() {		
