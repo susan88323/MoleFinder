@@ -11,4 +11,7 @@ public class BodyPartPhoto implements Serializable {
 		this.time = time;
 		this.imageFileUri = file;
 	}
+	public String getFilename() {
+		return imageFileUri.toString();
+	}
 }

@@ -19,4 +19,11 @@ public class BodyPart implements Serializable {
 	public void addPhoto(BodyPartPhoto bodyPartPhoto) {		
 		bodyPartPhotos.add(bodyPartPhoto);
 	}
+	public int countPhotos() {
+		return bodyPartPhotos.size();
+	}
+	public BodyPartPhoto getPhoto(int position) {
+		return bodyPartPhotos.get(position);
+	}
+	
 }

@@ -2,6 +2,8 @@ package es.softwareprocess.MoleFinder;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -14,10 +16,6 @@ public class BodyPartImageAdapter extends BaseAdapter {
     BodyPart bodyPart;
     private Context mContext;
 
-    private Integer[] mImageIds = {
-  
-    };
-
     public BodyPartImageAdapter(Context c, BodyPart bodyPart) {
         mContext = c;
         this.bodyPart = bodyPart;
@@ -28,7 +26,7 @@ public class BodyPartImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mImageIds.length;
+        return bodyPart.countPhotos();
     }
 
     public Object getItem(int position) {
@@ -38,11 +36,14 @@ public class BodyPartImageAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return position;
     }
-
+    Bitmap bitmapOfBodyPart(int position) {
+    	return BitmapFactory.decodeFile(bodyPart.getPhoto(position).getFilename());
+    }
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = new ImageView(mContext);
-
-        imageView.setImageResource(mImageIds[position]);
+        
+        Bitmap bmp = bitmapOfBodyPart(position);
+        imageView.setImageBitmap(bmp);       
         imageView.setLayoutParams(new Gallery.LayoutParams(150, 100));
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(mGalleryItemBackground);
