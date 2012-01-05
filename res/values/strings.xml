@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, MoleFinderActivity!</string>
+    <string name="app_name">MoleFinder</string>
+    <string name="broweseBodyPhotos">Browse Body Photos</string>
+    <string name="AddNewBodyPart">Add New Body Part</string>
+    <string name="bodyPartNamePrompt">Enter in the name of the new body part!</string>
+    <string name="OK">OK</string>
+    <string name="AddPhoto">Add Photo</string>
+
+</resources>
