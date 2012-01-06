@@ -25,5 +25,8 @@ public class BodyPart implements Serializable {
 	public BodyPartPhoto getPhoto(int position) {
 		return bodyPartPhotos.get(position);
 	}
+	public String id() {
+		return this.toString();
+	}
 	
 }

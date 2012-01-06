@@ -20,7 +20,6 @@ public class MoleFinderActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {				
 				Intent intent = new Intent(MoleFinderActivity.this, PhotoCollectionsActivity.class);
-				intent.putExtra("molefinder", MoleFinder.getMoleFinder());
 				startActivity(intent);
 			}		
 		});
@@ -30,7 +29,6 @@ public class MoleFinderActivity extends Activity {
 			@Override
 			public void onClick(View arg0) {				
 				Intent intent = new Intent(MoleFinderActivity.this, NewBodyPartActivity.class);				
-				intent.putExtra("molefinder", MoleFinder.getMoleFinder());
 				startActivity(intent);
 			}
 		});

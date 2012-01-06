@@ -21,11 +21,10 @@ public class NewBodyPartActivity extends Activity {
 			public void onClick(View arg0) {
 				EditText bodyPartText = (EditText)findViewById(R.id.bodyPartText);
 				String text = bodyPartText.getEditableText().toString();
-				MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
+				MoleFinder mf = MoleFinderApp.getMoleFinder();
 				mf.addBodyPart( text );
 				setResult(RESULT_OK);	
-				Intent resultIntent = new Intent();
-				resultIntent.putExtra(MoleFinder.name, mf );
+				Intent resultIntent = new Intent();				
 				setResult(Activity.RESULT_OK, resultIntent);
 				//MoleFinder.getMoleFinder().save();
 				finish();

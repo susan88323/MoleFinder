@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -32,9 +33,10 @@ public class BodyPartArchiveActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bodypartarchive);
-        bp = (BodyPart) getIntent().getExtras().get("bodypart");
-		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
-
+        MoleFinder mf = MoleFinderApp.getMoleFinder();
+        bp = mf.getBodyPart((String) getIntent().getExtras().get("bodypart"));
+		
+        Log.v(MoleFinderApp.LOG, "BodyPart "+bp+" has "+bp.countPhotos()+" photos");
 	    Gallery gallery = (Gallery) findViewById(R.id.gallery);
 	    gallery.setAdapter(new BodyPartImageAdapter(this, bp));
 
@@ -50,25 +52,32 @@ public class BodyPartArchiveActivity extends Activity {
             public void onClick(View v) {
             	// remember to jam in a result here
     			Intent intent = new Intent(BodyPartArchiveActivity.this, TakeAPhotoActivity.class);
-				intent.putExtra("molefinder", MoleFinder.getMoleFinder());
-				intent.putExtra("bodypart", bp);
+				intent.putExtra("bodypart", bp.id());
 				startActivity(intent);
-				startActivityForResult(intent, TakeAPhotoActivity.TAKE_A_PHOTO);
+				//startActivity(intent, TakeAPhotoActivity.TAKE_A_PHOTO);
             }        	
         });
+       
+	   Toast.makeText(BodyPartArchiveActivity.this, "N:" + bp.countPhotos(), Toast.LENGTH_SHORT).show();
+       
     }
+    
     @Override 
     public void onActivityResult(int requestCode, int resultCode, Intent newIntent) {     
       super.onActivityResult(requestCode, resultCode, newIntent); 
+      finish(); startActivity(getIntent());
+      /*
       switch(requestCode) { 
         case (TakeAPhotoActivity.TAKE_A_PHOTO) : { 
           if (resultCode == Activity.RESULT_OK) { 
-        	  MoleFinder.getMoleFinder(newIntent);
+        	  MoleFinder mf = MoleFinderApp.getMoleFinder();
         	  // update activity..        	  
           } 
           break; 
         } 
       } 
+      */
     }
+    
 
 }

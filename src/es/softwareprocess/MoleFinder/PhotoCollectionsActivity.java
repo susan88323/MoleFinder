@@ -22,7 +22,7 @@ public class PhotoCollectionsActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.photocollections);
-		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
+		MoleFinder mf = MoleFinderApp.getMoleFinder();
         bpa = mf.getBodyPartsAsArray();
         setListAdapter(new ArrayAdapter<BodyPart>(this, R.layout.list_item, bpa));
 
@@ -35,9 +35,8 @@ public class PhotoCollectionsActivity extends ListActivity {
             // When clicked, show a toast with the TextView text
             Toast.makeText(getApplicationContext(), ((TextView) view).getText(),
                 Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(PhotoCollectionsActivity.this, BodyPartArchiveActivity.class);
-			intent.putExtra("molefinder", MoleFinder.getMoleFinder());
-			intent.putExtra("bodypart", bpa[position]);
+			Intent intent = new Intent(PhotoCollectionsActivity.this, BodyPartArchiveActivity.class);			
+			intent.putExtra("bodypart", bpa[position].id());
 			startActivity(intent);
           }
         });

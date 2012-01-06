@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -19,10 +21,10 @@ public class BodyPartImageAdapter extends BaseAdapter {
     public BodyPartImageAdapter(Context c, BodyPart bodyPart) {
         mContext = c;
         this.bodyPart = bodyPart;
-        //TypedArray attr = mContext.obtainStyledAttributes(R.styleable.HelloGallery);
-        //mGalleryItemBackground = attr.getResourceId(
-        //        R.styleable.HelloGallery_android_galleryItemBackground, 0);
-        //attr.recycle();
+        TypedArray attr = mContext.obtainStyledAttributes(R.styleable.BodyPartGallery);
+        mGalleryItemBackground = attr.getResourceId(
+                R.styleable.BodyPartGallery_android_galleryItemBackground, 0);
+        attr.recycle();
     }
 
     public int getCount() {
@@ -39,12 +41,20 @@ public class BodyPartImageAdapter extends BaseAdapter {
     Bitmap bitmapOfBodyPart(int position) {
     	return BitmapFactory.decodeFile(bodyPart.getPhoto(position).getFilename());
     }
+    Drawable drawableOfBodyPart(int position) {
+    	return Drawable.createFromPath(bodyPart.getPhoto(position).getFilename());
+    }
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = new ImageView(mContext);
-        
         Bitmap bmp = bitmapOfBodyPart(position);
-        imageView.setImageBitmap(bmp);       
-        imageView.setLayoutParams(new Gallery.LayoutParams(150, 100));
+        String fileName = bodyPart.getPhoto(position).getFilename();
+        if (bmp == null) {
+        	Log.v(MoleFinderApp.LOG, bodyPart + "'s BMP Is null? "+fileName);
+        }
+        //imageView.setImageDrawable( drawableOfBodyPart(position));
+        //imageView.setImageResource(mImageIds[position]);
+        imageView.setImageBitmap( bmp );
+        imageView.setLayoutParams(new Gallery.LayoutParams(200, 200));
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);
         imageView.setBackgroundResource(mGalleryItemBackground);
 

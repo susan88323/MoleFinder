@@ -8,20 +8,7 @@ import android.net.Uri;
 
 public class MoleFinder implements Serializable {
 	static public String name = "molefinder";
-	transient static private MoleFinder moleFinderSingleton = null;
-	static public MoleFinder getMoleFinder(Intent intent) {		
-		MoleFinder mf = (MoleFinder)(intent.getExtras().get(name));
-		if (mf!=null) {
-			moleFinderSingleton = mf;				
-		}		
-		return getMoleFinder();
-	}
-	static public MoleFinder getMoleFinder() {		
-		if (moleFinderSingleton == null) {
-			moleFinderSingleton = new MoleFinder();
-		}
-		return moleFinderSingleton;
-	}
+
 
 	HashMap<String, BodyPart> bodyParts = new HashMap<String, BodyPart>();
 
@@ -41,5 +28,9 @@ public class MoleFinder implements Serializable {
 	}
 	public void addPhotoToBodyPart(BodyPart bodyPart, Uri imageFileUri) {
 		bodyPart.addPhoto(new BodyPartPhoto(imageFileUri,System.currentTimeMillis()));
+	}
+
+	public BodyPart getBodyPart(String bodyPart) {
+		return bodyParts.get(bodyPart);		
 	}	
 }

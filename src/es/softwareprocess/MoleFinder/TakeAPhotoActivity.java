@@ -30,8 +30,8 @@ public class TakeAPhotoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cameratest);
         
-		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
-		bodyPart = (BodyPart) getIntent().getExtras().get("bodypart");
+        MoleFinder mf = MoleFinderApp.getMoleFinder();
+        bodyPart = mf.getBodyPart((String) getIntent().getExtras().get("bodypart"));				
         ImageButton button = (ImageButton)findViewById(R.id.TakeAPhoto);
         OnClickListener listener = new OnClickListener() {
             public void onClick(View v) {
@@ -61,14 +61,10 @@ public class TakeAPhotoActivity extends Activity {
     }
 
     void addPhoto() {
-		Intent resultIntent = new Intent();
-
-		MoleFinder mf = MoleFinder.getMoleFinder(getIntent());
-		mf.addPhotoToBodyPart(bodyPart, imageFileUri);
-
-		resultIntent.putExtra(MoleFinder.name, mf );
-		
-		setResult(Activity.RESULT_OK, resultIntent);
+		//Intent resultIntent = new Intent();
+		MoleFinder mf = MoleFinderApp.getMoleFinder();
+		mf.addPhotoToBodyPart(bodyPart, imageFileUri);		
+		//setResult(Activity.RESULT_OK, resultIntent);
 
     }
     protected static String id = "ID"; 
